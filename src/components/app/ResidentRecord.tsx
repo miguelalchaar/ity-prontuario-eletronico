@@ -162,6 +162,8 @@ import {
       [occurrences, id],
     )
   
+    
+
     if (!resident) {
       return (
         <AppShell>
@@ -194,38 +196,40 @@ import {
         </AppShell>
       )
     }
-  
+
+    const currentResident: Resident = resident
+    
     const isActive =
       resident.status === 'Ativo'
   
-    function handleCloseResident(
-      status: ResidentStatus,
-      reason: string,
-    ) {
-      updateResident(resident.id, {
-        status,
-        closureDate: getCurrentDate(),
-        closureReason: reason,
-      })
+      function handleCloseResident(
+        status: ResidentStatus,
+        reason: string,
+      ) {
+        updateResident(currentResident.id, {
+          status,
+          closureDate: getCurrentDate(),
+          closureReason: reason,
+        })
+      
+        setClosureModalOpen(false)
+      }
   
-      setClosureModalOpen(false)
-    }
+      function handleDeleteResident() {
+        removeResident(currentResident.id)
+        setDeleteModalOpen(false)
+        navigate('/residentes')
+      }
   
-    function handleDeleteResident() {
-      removeResident(resident.id)
-      setDeleteModalOpen(false)
-      navigate('/residentes')
-    }
-  
-    function handleExportPdf() {
-      exportResidentReport({
-        resident,
-        medications: residentMedications,
-        vitals: residentVitals,
-        evolutions: residentEvolutions,
-        occurrences: residentOccurrences,
-      })
-    }
+      function handleExportPdf() {
+        exportResidentReport({
+          resident: currentResident,
+          medications: residentMedications,
+          vitals: residentVitals,
+          evolutions: residentEvolutions,
+          occurrences: residentOccurrences,
+        })
+      }
   
     return (
       <AppShell>

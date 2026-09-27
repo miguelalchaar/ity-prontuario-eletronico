@@ -6,7 +6,6 @@ import {
     UserRoundPlus,
     Users,
     Wifi,
-    X,
   } from 'lucide-react'
   import { useState, type ReactNode } from 'react'
   import { Link, useLocation } from 'react-router-dom'
