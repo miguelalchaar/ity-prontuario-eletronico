@@ -1,12 +1,39 @@
-import { useState } from 'react'
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+} from 'react-router-dom'
+
+import Dashboard from './components/app/Dashboard'
+import NewResident from './components/app/NewResident'
+import ResidentRecord from './components/app/ResidentRecord'
+import Residents from './components/app/Residents'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-     
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={<Dashboard />}
+        />
+
+        <Route
+          path="/residentes"
+          element={<Residents />}
+        />
+
+        <Route
+          path="/residentes/novo"
+          element={<NewResident />}
+        />
+
+        <Route
+          path="/residentes/:id"
+          element={<ResidentRecord />}
+        />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
